@@ -1,57 +1,61 @@
 import { useState } from 'react'
-import AgentHeader from './components/AgentHeader/AgentHeader.jsx'
-import StatCard from './components/StatCard/StatCard.jsx'
-import TicketActions from './components/TicketActions/TicketActions.jsx'
-import StatusMessage from './components/StatusMessage/StatusMessage.jsx'
-import {
-  AGENT_NAME,
-  INITIAL_OPEN_TICKETS,
-  MAX_CAPACITY,
-  MIN_OPEN_TICKETS,
-} from './constants/agent.js'
-import { LABELS, MESSAGES } from './constants/messages.js'
+import Header from './components/Header'
+import StatCard from './components/StatCard'
 import './App.css'
 
+const agentInfo = {
+  name: 'Ahmad',
+  maxTickets: 8,
+  startTickets: 2,
+}
+
 function App() {
-  const [openTickets, setOpenTickets] = useState(INITIAL_OPEN_TICKETS)
+  const { name, maxTickets, startTickets } = agentInfo
 
-  const availableCapacity = MAX_CAPACITY - openTickets
-  const isAtMax = openTickets >= MAX_CAPACITY
-  const isEmpty = openTickets <= MIN_OPEN_TICKETS
+  const [tickets, setTickets] = useState(startTickets)
 
-  const handleReceive = () => {
-    setOpenTickets((prev) => Math.min(prev + 1, MAX_CAPACITY))
+  const available = maxTickets - tickets
+
+  function receiveTicket() {
+    setTickets((prev) => (prev < maxTickets ? prev + 1 : prev))
   }
 
-  const handleComplete = () => {
-    setOpenTickets((prev) => Math.max(prev - 1, MIN_OPEN_TICKETS))
+  function completeTicket() {
+    setTickets((prev) => (prev > 0 ? prev - 1 : prev))
   }
 
-  const handleReset = () => {
-    setOpenTickets(INITIAL_OPEN_TICKETS)
+  function resetTickets() {
+    setTickets(startTickets)
   }
 
   return (
-    <main className="dashboard">
-      <AgentHeader title={LABELS.title} label={LABELS.agent} name={AGENT_NAME} />
+    <div className="app">
+      <Header name={name} />
 
-      <section className="dashboard__stats">
-        <StatCard label={LABELS.maxCapacity} value={MAX_CAPACITY} />
-        <StatCard label={LABELS.openTickets} value={openTickets} variant="warning" />
-        <StatCard label={LABELS.availableCapacity} value={availableCapacity} variant="success" />
-      </section>
+      <div className="cards">
+        <StatCard title="السعة القصوى" value={maxTickets} />
+        <StatCard title="التذاكر غير المنجزة" value={tickets} />
+        <StatCard title="السعة المتاحة" value={available} />
+      </div>
 
-      <TicketActions
-        onReceive={handleReceive}
-        onComplete={handleComplete}
-        onReset={handleReset}
-        canReceive={!isAtMax}
-        canComplete={!isEmpty}
-      />
+      <div className="buttons">
+        <button onClick={receiveTicket} disabled={tickets === maxTickets}>
+          استلام تذكرة
+        </button>
+        <button onClick={completeTicket} disabled={tickets === 0}>
+          إنجاز تذكرة
+        </button>
+        <button onClick={resetTickets}>إعادة ضبط</button>
+      </div>
 
-      {isAtMax && <StatusMessage type="danger">{MESSAGES.maxReached}</StatusMessage>}
-      {isEmpty && <StatusMessage type="info">{MESSAGES.noTickets}</StatusMessage>}
-    </main>
+      {tickets === maxTickets && (
+        <p className="message">وصل الموظف إلى الحد الأقصى للتذاكر</p>
+      )}
+
+      {tickets === 0 && (
+        <p className="message">لا توجد تذاكر تحتاج إلى معالجة</p>
+      )}
+    </div>
   )
 }
 
