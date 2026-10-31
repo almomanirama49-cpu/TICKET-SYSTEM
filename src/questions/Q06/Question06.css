@@ -1,0 +1,133 @@
+.q06 .header {
+  background-color: #15263f;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.q06 .header h1 {
+  margin: 0;
+}
+
+.q06 .panel {
+  margin-top: 24px;
+  background-color: white;
+  border: 1px solid #dde4ea;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.q06 .panel-title {
+  margin: 0 0 16px;
+  font-size: 20px;
+  color: #1a8a7a;
+}
+
+.q06 .stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.q06 .stat-card {
+  flex: 1;
+  min-width: 120px;
+  background-color: #f3f6f9;
+  border-top: 4px solid #15263f;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.q06 .stat-card h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #5b6b7f;
+}
+
+.q06 .stat-card p {
+  margin: 6px 0 0;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.q06 .tickets {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.q06 .ticket-card {
+  border: 1px solid #dde4ea;
+  border-inline-start: 4px solid #1a8a7a;
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.q06 .ticket-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.q06 .ticket-id {
+  color: #5b6b7f;
+  font-weight: bold;
+}
+
+.q06 .ticket-subject {
+  flex: 1;
+  margin: 0;
+  font-size: 18px;
+}
+
+.q06 .ticket-assigned {
+  margin: 10px 0 0;
+}
+
+.q06 .status-badge {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.q06 .status-badge.open {
+  background-color: #e8f0fa;
+  color: #2563a8;
+}
+
+.q06 .status-badge.pending {
+  background-color: #fdf3e1;
+  color: #c27c0e;
+}
+
+.q06 .status-badge.closed {
+  background-color: #e8f4f2;
+  color: #1a8a7a;
+}
+
+.q06 .ticket-button,
+.q06 .reset-button {
+  margin-top: 12px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1a8a7a;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.q06 .reset-button {
+  margin-top: 24px;
+  background-color: #15263f;
+}
+
+.q06 .message {
+  margin: 24px 0 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: #e8f4f2;
+  color: #1a8a7a;
+  font-weight: bold;
+}
