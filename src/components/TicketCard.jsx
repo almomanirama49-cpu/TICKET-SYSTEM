@@ -1,37 +1,27 @@
-import { useState } from 'react'
+import StatusBadge from './StatusBadge'
 
-function TicketCard({ id, subject, status, assignedTo, description }) {
-  const [isExpanded, setIsExpanded] = useState(false)
-  const [isFollowed, setIsFollowed] = useState(false)
+const nextStep = {
+  Open: { label: 'بدء المعالجة', nextStatus: 'Pending' },
+  Pending: { label: 'إغلاق التذكرة', nextStatus: 'Closed' },
+  Closed: { label: 'إعادة فتح التذكرة', nextStatus: 'Open' },
+}
 
-  function toggleDetails() {
-    setIsExpanded((prev) => !prev)
-  }
-
-  function toggleFollow(event) {
-    event.stopPropagation()
-    setIsFollowed((prev) => !prev)
-  }
+function TicketCard({ ticket, onChangeStatus }) {
+  const { id, subject, status, assignedTo } = ticket
+  const { label, nextStatus } = nextStep[status]
 
   return (
-    <div className="ticket-card" onClick={toggleDetails}>
+    <div className="ticket-card">
       <div className="ticket-header">
         <span className="ticket-id">#{id}</span>
-        <h2 className="ticket-subject">{subject}</h2>
-        <span className="ticket-status">{status}</span>
+        <h3 className="ticket-subject">{subject}</h3>
+        <StatusBadge status={status} />
       </div>
 
-      {isFollowed && <p className="follow-badge">تابع هذه التذكرة</p>}
+      <p className="ticket-assigned">الموظف المسؤول: {assignedTo}</p>
 
-      {isExpanded && (
-        <div className="ticket-details">
-          <p>الموظف المسؤول: {assignedTo}</p>
-          <p>الوصف: {description}</p>
-        </div>
-      )}
-
-      <button className="follow-button" onClick={toggleFollow}>
-        {isFollowed ? 'إلغاء المتابعة' : 'متابعة التذكرة'}
+      <button className="ticket-button" onClick={() => onChangeStatus(id, nextStatus)}>
+        {label}
       </button>
     </div>
   )
