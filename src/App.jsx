@@ -1,81 +1,42 @@
 import { useState } from 'react'
-import Panel from './components/Panel'
-import StatCard from './components/StatCard'
-import TicketCard from './components/TicketCard'
+import Question01 from './questions/Q01/Question01'
+import Question02 from './questions/Q02/Question02'
+import Question03 from './questions/Q03/Question03'
+import Question04 from './questions/Q04/Question04'
+import Question05 from './questions/Q05/Question05'
+import Question06 from './questions/Q06/Question06'
 import './App.css'
 
-const initialTickets = [
-  {
-    id: 1001,
-    subject: 'Login Issue',
-    status: 'Open',
-    assignedTo: 'Ahmad',
-  },
-  {
-    id: 1002,
-    subject: 'Payment Failed',
-    status: 'Pending',
-    assignedTo: 'Sara',
-  },
-  {
-    id: 1003,
-    subject: 'Report Download',
-    status: 'Closed',
-    assignedTo: 'Omar',
-  },
+const questions = [
+  { number: 1, title: 'متابعة التذاكر', Component: Question01 },
+  { number: 2, title: 'بطاقات التذاكر', Component: Question02 },
+  { number: 3, title: 'تعديل التذكرة', Component: Question03 },
+  { number: 4, title: 'استقبال دفعة', Component: Question04 },
+  { number: 5, title: 'متابعة تذكرة', Component: Question05 },
+  { number: 6, title: 'لوحة التذاكر', Component: Question06 },
 ]
 
 function App() {
-  const [tickets, setTickets] = useState(initialTickets)
+  const [current, setCurrent] = useState(1)
 
-  const [first, second, third] = tickets
-
-  const total = tickets.length
-  const openCount = tickets.filter((ticket) => ticket.status === 'Open').length
-  const pendingCount = tickets.filter((ticket) => ticket.status === 'Pending').length
-  const closedCount = tickets.filter((ticket) => ticket.status === 'Closed').length
-  const activeCount = openCount + pendingCount
-  const allClosed = closedCount === total
-
-  function changeStatus(id, newStatus) {
-    setTickets((prev) =>
-      prev.map((ticket) => (ticket.id === id ? { ...ticket, status: newStatus } : ticket)),
-    )
-  }
-
-  function resetBoard() {
-    setTickets(initialTickets.map((ticket) => ({ ...ticket })))
-  }
+  const { Component } = questions.find((question) => question.number === current)
 
   return (
     <div className="app">
-      <header className="header">
-        <h1>لوحة التذاكر</h1>
-      </header>
+      <nav className="question-nav">
+        {questions.map(({ number, title }) => (
+          <button
+            key={number}
+            className={number === current ? 'active' : ''}
+            onClick={() => setCurrent(number)}
+          >
+            <span className="question-number">السؤال {number}</span>
+            {title}
+          </button>
+        ))}
+      </nav>
 
-      <Panel title="الإحصاءات">
-        <div className="stats">
-          <StatCard title="الإجمالي" value={total} />
-          <StatCard title="المفتوحة" value={openCount} />
-          <StatCard title="المعلقة" value={pendingCount} />
-          <StatCard title="المغلقة" value={closedCount} />
-          <StatCard title="النشطة" value={activeCount} />
-        </div>
-      </Panel>
-
-      {allClosed && <p className="message">تم إنجاز جميع التذاكر</p>}
-
-      <Panel title="التذاكر">
-        <div className="tickets">
-          <TicketCard ticket={first} onChangeStatus={changeStatus} />
-          <TicketCard ticket={second} onChangeStatus={changeStatus} />
-          <TicketCard ticket={third} onChangeStatus={changeStatus} />
-        </div>
-      </Panel>
-
-      <button className="reset-button" onClick={resetBoard}>
-        إعادة ضبط اللوحة
-      </button>
+      <Component />
     </div>
   )
 }

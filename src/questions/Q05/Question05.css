@@ -1,0 +1,84 @@
+.q05 .header {
+  background-color: #15263f;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.q05 .header h1 {
+  margin: 0;
+}
+
+.q05 .ticket-card {
+  margin-top: 24px;
+  background-color: white;
+  border: 1px solid #dde4ea;
+  border-inline-start: 4px solid #1a8a7a;
+  border-radius: 10px;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.q05 .ticket-card:hover {
+  background-color: #fafcfd;
+}
+
+.q05 .ticket-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.q05 .ticket-id {
+  color: #5b6b7f;
+  font-weight: bold;
+}
+
+.q05 .ticket-subject {
+  flex: 1;
+  margin: 0;
+  font-size: 20px;
+}
+
+.q05 .ticket-status {
+  padding: 4px 12px;
+  border-radius: 20px;
+  background-color: #fdf3e1;
+  color: #c27c0e;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.q05 .follow-badge {
+  display: inline-block;
+  margin: 12px 0 0;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background-color: #e8f0fa;
+  color: #2563a8;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.q05 .ticket-details {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f3f6f9;
+}
+
+.q05 .ticket-details p {
+  margin: 4px 0;
+}
+
+.q05 .follow-button {
+  display: block;
+  margin-top: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1a8a7a;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+}
