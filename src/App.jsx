@@ -1,29 +1,74 @@
-import TicketPanel from './components/TicketPanel'
+import { useState } from 'react'
+import TicketDetails from './components/TicketDetails'
 import './App.css'
 
+const initialTicket = {
+  id: 204,
+  subject: 'Login Issue',
+  status: 'Open',
+  priority: 'Normal',
+  assignedTo: 'Ahmad',
+  requester: {
+    name: 'Lina',
+    department: 'Sales',
+    email: 'lina@example.com',
+  },
+}
+
 function App() {
+  const [ticket, setTicket] = useState(initialTicket)
+  const [isEdited, setIsEdited] = useState(false)
+
+  function toggleAssignee() {
+    setTicket((prev) => ({
+      ...prev,
+      assignedTo: prev.assignedTo === 'Ahmad' ? 'Sara' : 'Ahmad',
+    }))
+    setIsEdited(true)
+  }
+
+  function togglePriority() {
+    setTicket((prev) => ({
+      ...prev,
+      priority: prev.priority === 'Normal' ? 'Urgent' : 'Normal',
+    }))
+    setIsEdited(true)
+  }
+
+  function toggleDepartment() {
+    setTicket((prev) => ({
+      ...prev,
+      requester: {
+        ...prev.requester,
+        department: prev.requester.department === 'Sales' ? 'IT' : 'Sales',
+      },
+    }))
+    setIsEdited(true)
+  }
+
+  function resetTicket() {
+    setTicket(initialTicket)
+    setIsEdited(false)
+  }
+
   return (
     <div className="app">
       <header className="header">
-        <h1>بطاقات التذاكر</h1>
+        <h1>تعديل بيانات التذكرة</h1>
       </header>
 
-      <div className="tickets">
-        <TicketPanel id={1001} subject="Login Issue" status="Open">
-          <p>صاحب الطلب: Lina</p>
-          <p>وصف المشكلة: المستخدم لا يستطيع الدخول إلى حسابه.</p>
-        </TicketPanel>
+      <TicketDetails
+        ticket={ticket}
+        onToggleAssignee={toggleAssignee}
+        onTogglePriority={togglePriority}
+        onToggleDepartment={toggleDepartment}
+      />
 
-        <TicketPanel id={1002} subject="Payment Failed" status="Pending">
-          <p>صاحب الطلب: Omar</p>
-          <p>وصف المشكلة: ظهرت رسالة خطأ أثناء الدفع.</p>
-        </TicketPanel>
+      {isEdited && <p className="message">تم تعديل بيانات التذكرة</p>}
 
-        <TicketPanel id={1003} status="Closed">
-          <p>صاحب الطلب: Sara</p>
-          <p>ملاحظة الحل: تم حل المشكلة وإبلاغ المستخدم.</p>
-        </TicketPanel>
-      </div>
+      <button className="reset-button" onClick={resetTicket}>
+        إعادة ضبط
+      </button>
     </div>
   )
 }
