@@ -1,5 +1,5 @@
 .app {
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 32px 16px;
 }
@@ -15,18 +15,58 @@
   margin: 0;
 }
 
-.ticket-card {
+.panel {
   margin-top: 24px;
   background-color: white;
   border: 1px solid #dde4ea;
-  border-inline-start: 4px solid #1a8a7a;
   border-radius: 10px;
   padding: 20px;
-  cursor: pointer;
 }
 
-.ticket-card:hover {
-  background-color: #fafcfd;
+.panel-title {
+  margin: 0 0 16px;
+  font-size: 20px;
+  color: #1a8a7a;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.stat-card {
+  flex: 1;
+  min-width: 120px;
+  background-color: #f3f6f9;
+  border-top: 4px solid #15263f;
+  border-radius: 10px;
+  padding: 14px;
+}
+
+.stat-card h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #5b6b7f;
+}
+
+.stat-card p {
+  margin: 6px 0 0;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.tickets {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ticket-card {
+  border: 1px solid #dde4ea;
+  border-inline-start: 4px solid #1a8a7a;
+  border-radius: 10px;
+  padding: 16px;
 }
 
 .ticket-header {
@@ -43,43 +83,38 @@
 .ticket-subject {
   flex: 1;
   margin: 0;
-  font-size: 20px;
+  font-size: 18px;
 }
 
-.ticket-status {
+.ticket-assigned {
+  margin: 10px 0 0;
+}
+
+.status-badge {
   padding: 4px 12px;
   border-radius: 20px;
-  background-color: #fdf3e1;
-  color: #c27c0e;
   font-size: 14px;
   font-weight: bold;
 }
 
-.follow-badge {
-  display: inline-block;
-  margin: 12px 0 0;
-  padding: 4px 12px;
-  border-radius: 20px;
+.status-badge.open {
   background-color: #e8f0fa;
   color: #2563a8;
-  font-size: 14px;
-  font-weight: bold;
 }
 
-.ticket-details {
+.status-badge.pending {
+  background-color: #fdf3e1;
+  color: #c27c0e;
+}
+
+.status-badge.closed {
+  background-color: #e8f4f2;
+  color: #1a8a7a;
+}
+
+.ticket-button,
+.reset-button {
   margin-top: 12px;
-  padding: 12px;
-  border-radius: 8px;
-  background-color: #f3f6f9;
-}
-
-.ticket-details p {
-  margin: 4px 0;
-}
-
-.follow-button {
-  display: block;
-  margin-top: 16px;
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
@@ -87,4 +122,18 @@
   color: white;
   font-size: 15px;
   cursor: pointer;
+}
+
+.reset-button {
+  margin-top: 24px;
+  background-color: #15263f;
+}
+
+.message {
+  margin: 24px 0 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: #e8f4f2;
+  color: #1a8a7a;
+  font-weight: bold;
 }
